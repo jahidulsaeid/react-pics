@@ -13,7 +13,7 @@ class ImageCard extends Component {
     const height = this.imageRef.current.clientHeight;
     const spans = Math.ceil(height / 10);
     this.setState({ spans });
-    console.log(height);
+    // console.log(height);
   };
 
   render() {
