@@ -1,26 +1,44 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import unsplash from "../api/unsplash";
 import ImageList from "./ImageList";
+import Loading from "./Loading";
 
-class App extends Component {
-  state = { images: [] };
-  onSearchSubmit = async (term) => {
+const App = () => {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const onSearchSubmit = async (term) => {
+    setLoading(true)
     const response = await unsplash.get("/search/photos", {
       params: { query: term },
     });
-    // console.log(response.data.results);
-    this.setState({ images: response.data.results });
-  };
-  render() {
-    return (
-      <div className="ui container" style={{ marginTop: "20px" }}>
-        <SearchBar onSubmit={this.onSearchSubmit} />
-        {/* {this.state.images.length} */}
-        <ImageList images={this.state.images}/>
-      </div>
-    );
+    if (response.status === 200) {
+      setImages(response.data.results);
+      console.log(loading);
+      setLoading(false)
+    } else {
+      console.log("ERROR");
+      console.log(loading);
+      setLoading(false)
+    }
   }
+  return (
+    <>
+      {loading ? <Loading /> :
+        <div className="ui container" style={{ marginTop: "20px" }}>
+          {console.log(images.length)}
+          <SearchBar onSubmit={onSearchSubmit} />
+       
+          {images.length === 0 ? <h1 style={{textAlign:"center"}}>Sorry didn't find any image...</h1> :
+             <ImageList images={images} />
+          }
+          
+        </div>
+
+      }
+    </>
+  )
 }
 
-export default App;
+export default App
+

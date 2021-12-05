@@ -15,12 +15,13 @@ class SearchBar extends Component {
         <form className="ui form" onSubmit={this.onFormSubmit}>
           <div className="field">
             <label>
-              <h3>Image Search</h3>
+              <h3 style={{textAlign:"center"}}>Image Search</h3>
             </label>
             <input
               type="text"
               value={this.state.term}
               onChange={(e) => this.setState({ term: e.target.value })}
+              placeholder="Search anything..."
             />
           </div>
         </form>

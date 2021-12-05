@@ -1,0 +1,16 @@
+.spinner {
+    width:60px;
+    height:60px;
+    --c:radial-gradient(farthest-side,#25b09b 92%,#0000);
+    background: 
+      var(--c) 50% 0,
+      var(--c) 50% 100%,
+      var(--c) 100% 50%,
+      var(--c) 0    50%;
+    background-size:12px 12px;
+    background-repeat:no-repeat;
+    animation:spin 1s infinite;
+
+    margin: 20% auto;
+  }
+  @keyframes spin {to{transform: rotate(.5turn)}}
